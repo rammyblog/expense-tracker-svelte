@@ -1,7 +1,17 @@
+<script>
+  import { transaction } from "./store";
+</script>
+
 <div>
   <h4>History</h4>
-  <div class="money minus">-$491 <button class="delete-btn">X</button></div>
-  <div class="money plus">+$500<button class="delete-btn">X</button></div>
+  {#each $transaction as item (item.id)}
+    <div class="money">
+      {item.text}
+      <span class={item.amount > 0 ? "plus" : "minus"}>${item.amount}</span>
+      <button class="delete-btn">X</button>
+    </div>
+  {/each}
+  <!-- <div class="money plus">+$500<button class="delete-btn">X</button></div>  -->
 </div>
 
 <style>
@@ -13,6 +23,8 @@
     color: #333;
     font-weight: 300;
     position: relative;
+    display: flex;
+    justify-content: space-between;
   }
   .plus {
     border-right: 5px solid #2ecc71;
