@@ -2,13 +2,14 @@
   import Dashboard from "./Dashboard.svelte";
   import History from "./History.svelte";
   import TransactionForm from "./TransactionForm.svelte";
+  import { total } from "./store";
 </script>
 
 <main>
   <h1>Expense Tracker</h1>
   <div class="balance">
     <h4>Your Balance</h4>
-    <p>$0.00</p>
+    <p>${$total.toFixed(2)}</p>
   </div>
   <Dashboard />
   <History />

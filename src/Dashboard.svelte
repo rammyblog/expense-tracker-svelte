@@ -1,11 +1,15 @@
+<script>
+  import { income, expense } from "./store";
+</script>
+
 <div class="dashboard">
   <div class="dashboard-income">
     <h4>Income</h4>
-    <p class="money plus">+$0.00</p>
+    <p class="money plus">+${$income.toFixed(2)}</p>
   </div>
   <div class="dashboard-expense">
     <h4>Expense</h4>
-    <p class="money minus">-$0.00</p>
+    <p class="money minus">-${$expense.toFixed(2)}</p>
   </div>
 </div>
 

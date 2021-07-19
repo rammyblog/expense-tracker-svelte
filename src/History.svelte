@@ -1,17 +1,23 @@
 <script>
   import { transactions } from "./store";
+  import { fly } from "svelte/transition";
 </script>
 
 <div>
   <h4>History</h4>
   {#each $transactions.transactions as item (item.id)}
-    <div class={item.amount > 0 ? " money plus" : "money minus"}>
+    <div
+      class={item.amount >= 0 ? " money plus" : "money minus"}
+      transition:fly={{ x: -200, duration: 1000 }}
+    >
       {item.text}
       <span>${item.amount}</span>
       <button on:click={() => transactions.remove(item)} class="delete-btn"
         >X</button
       >
     </div>
+  {:else}
+    <p>Your transaction history will show here</p>
   {/each}
 </div>
 

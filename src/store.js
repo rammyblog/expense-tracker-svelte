@@ -1,4 +1,4 @@
-import { writable } from "svelte/store";
+import { writable, derived } from "svelte/store";
 
 function createTransaction() {
   const { subscribe, set, update } = writable({ transactions: [] });
@@ -7,8 +7,7 @@ function createTransaction() {
     subscribe,
     add: (transaction) =>
       update((store) => {
-        console.log(store);
-        transaction.id = store.transactions.length + 1;
+        transaction.id = Math.random();
         store.transactions = store.transactions.concat(transaction);
         return store;
       }),
@@ -23,3 +22,28 @@ function createTransaction() {
   };
 }
 export const transactions = createTransaction();
+
+export const income = derived(transactions, ($transactions) =>
+  $transactions.transactions.reduce((acc, transaction) => {
+    if (transaction.amount >= 0) {
+      return acc + transaction.amount;
+    }
+    return acc;
+  }, 0)
+);
+
+export const expense = derived(transactions, ($transactions) =>
+  $transactions.transactions.reduce((acc, transaction) => {
+    if (transaction.amount <= 0) {
+      return acc + transaction.amount;
+    }
+    return acc;
+  }, 0)
+);
+
+export const total = derived(transactions, ($transactions) =>
+  $transactions.transactions.reduce(
+    (acc, transaction) => acc + transaction.amount,
+    0
+  )
+);
