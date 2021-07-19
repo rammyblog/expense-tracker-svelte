@@ -26,11 +26,8 @@
   h1 {
     text-transform: uppercase;
   }
-
-  .balance h4,
   .balance p {
-    margin: 0;
-    padding: 0;
+    font-size: 1.5rem;
   }
 
   @media (min-width: 640px) {

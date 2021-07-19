@@ -27,7 +27,7 @@
     width: 100%;
   }
   input[type="submit"] {
-    background: rgb(9, 9, 203);
+    background: rgb(74, 74, 169);
     color: #fff;
     cursor: padding
   }
