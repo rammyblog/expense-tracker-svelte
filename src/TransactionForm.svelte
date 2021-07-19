@@ -1,15 +1,31 @@
+<script>
+  import { transaction } from "./store";
+  let text;
+  let amount;
+</script>
+
 <div>
   <h4>Add new transaction</h4>
-  <form>
+  <form on:submit|preventDefault={() => transaction.add({ text, amount })}>
     <div class="form-control">
       <label for="text">Text</label>
-      <input placeholder="Enter text" name="text" type="text" />
+      <input
+        placeholder="Enter text"
+        name="text"
+        bind:value={text}
+        type="text"
+      />
     </div>
     <div class="form-control">
       <label for="amount"
         >Amount<br />(negative - expense, positive - income)</label
       >
-      <input placeholder="Enter text" name="amount" type="number" />
+      <input
+        placeholder="Enter amount"
+        bind:value={amount}
+        name="amount"
+        type="number"
+      />
     </div>
     <input type="submit" value="Add transaction" />
   </form>
@@ -29,6 +45,6 @@
   input[type="submit"] {
     background: rgb(74, 74, 169);
     color: #fff;
-    cursor: padding
+    cursor: padding;
   }
 </style>
