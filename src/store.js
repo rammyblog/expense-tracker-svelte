@@ -7,14 +7,19 @@ function createTransaction() {
     subscribe,
     add: (transaction) =>
       update((store) => {
+        console.log(store);
         transaction.id = store.transactions.length + 1;
-        store.transactions.concat(transaction);
+        store.transactions = store.transactions.concat(transaction);
+        return store;
       }),
     remove: (transaction) =>
       update((store) => {
-        return store.map((t) => (t.id !== transaction.id ? t : null));
+        store.transactions = store.transactions.filter(
+          (t) => t.id !== transaction.id
+        );
+        return store;
       }),
     reset: () => set({ transactions: [] }),
   };
 }
-export const transaction = createTransaction();
+export const transactions = createTransaction();

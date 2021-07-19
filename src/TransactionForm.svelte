@@ -1,12 +1,12 @@
 <script>
-  import { transaction } from "./store";
+  import { transactions } from "./store";
   let text;
   let amount;
 </script>
 
 <div>
   <h4>Add new transaction</h4>
-  <form on:submit|preventDefault={() => transaction.add({ text, amount })}>
+  <form on:submit|preventDefault={() => transactions.add({ text, amount })}>
     <div class="form-control">
       <label for="text">Text</label>
       <input
@@ -14,6 +14,7 @@
         name="text"
         bind:value={text}
         type="text"
+        required
       />
     </div>
     <div class="form-control">
@@ -25,6 +26,7 @@
         bind:value={amount}
         name="amount"
         type="number"
+        required
       />
     </div>
     <input type="submit" value="Add transaction" />

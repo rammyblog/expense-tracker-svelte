@@ -1,17 +1,18 @@
 <script>
-  import { transaction } from "./store";
+  import { transactions } from "./store";
 </script>
 
 <div>
   <h4>History</h4>
-  {#each $transaction as item (item.id)}
-    <div class="money">
+  {#each $transactions.transactions as item (item.id)}
+    <div class={item.amount > 0 ? " money plus" : "money minus"}>
       {item.text}
-      <span class={item.amount > 0 ? "plus" : "minus"}>${item.amount}</span>
-      <button class="delete-btn">X</button>
+      <span>${item.amount}</span>
+      <button on:click={() => transactions.remove(item)} class="delete-btn"
+        >X</button
+      >
     </div>
   {/each}
-  <!-- <div class="money plus">+$500<button class="delete-btn">X</button></div>  -->
 </div>
 
 <style>
