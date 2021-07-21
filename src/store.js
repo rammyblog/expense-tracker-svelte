@@ -33,12 +33,14 @@ export const income = derived(transactions, ($transactions) =>
 );
 
 export const expense = derived(transactions, ($transactions) =>
-  $transactions.transactions.reduce((acc, transaction) => {
-    if (transaction.amount <= 0) {
-      return acc + transaction.amount;
-    }
-    return acc;
-  }, 0)
+  Math.abs(
+    $transactions.transactions.reduce((acc, transaction) => {
+      if (transaction.amount <= 0) {
+        return acc + transaction.amount;
+      }
+      return acc;
+    }, 0)
+  )
 );
 
 export const total = derived(transactions, ($transactions) =>
